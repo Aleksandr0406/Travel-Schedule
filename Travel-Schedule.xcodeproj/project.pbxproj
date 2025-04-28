@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		333359882DB92DBB00D0CD16 /* OpenAPIURLSession in Frameworks */ = {isa = PBXBuildFile; productRef = 333359872DB92DBB00D0CD16 /* OpenAPIURLSession */; };
+		3333598B2DB92DCB00D0CD16 /* OpenAPIRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 3333598A2DB92DCB00D0CD16 /* OpenAPIRuntime */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		33B0303E2DB69AA1003991C0 /* Travel-Schedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Travel-Schedule.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -14,7 +19,7 @@
 		33B030502DB69AA3003991C0 /* Exceptions for "Travel-Schedule" folder in "Travel-Schedule" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				AssetsInfoLaunchScMain/Info.plist,
 			);
 			target = 33B0303D2DB69AA1003991C0 /* Travel-Schedule */;
 		};
@@ -36,16 +41,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3333598B2DB92DCB00D0CD16 /* OpenAPIRuntime in Frameworks */,
+				333359882DB92DBB00D0CD16 /* OpenAPIURLSession in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		333359E42DB9392100D0CD16 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		33B030352DB69AA1003991C0 = {
 			isa = PBXGroup;
 			children = (
 				33B030402DB69AA1003991C0 /* Travel-Schedule */,
+				333359E42DB9392100D0CD16 /* Frameworks */,
 				33B0303F2DB69AA1003991C0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,12 +87,15 @@
 			buildRules = (
 			);
 			dependencies = (
+				333359912DB92DF100D0CD16 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				33B030402DB69AA1003991C0 /* Travel-Schedule */,
 			);
 			name = "Travel-Schedule";
 			packageProductDependencies = (
+				333359872DB92DBB00D0CD16 /* OpenAPIURLSession */,
+				3333598A2DB92DCB00D0CD16 /* OpenAPIRuntime */,
 			);
 			productName = "Travel-Schedule";
 			productReference = 33B0303E2DB69AA1003991C0 /* Travel-Schedule.app */;
@@ -107,6 +125,11 @@
 			);
 			mainGroup = 33B030352DB69AA1003991C0;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				33457DD42DB7F74E0002477F /* XCRemoteSwiftPackageReference "swift-openapi-generator" */,
+				333359862DB92DBB00D0CD16 /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */,
+				333359892DB92DCB00D0CD16 /* XCRemoteSwiftPackageReference "swift-openapi-runtime" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 33B0303F2DB69AA1003991C0 /* Products */;
 			projectDirPath = "";
@@ -137,6 +160,13 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		333359912DB92DF100D0CD16 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 333359902DB92DF100D0CD16 /* OpenAPIGenerator */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		33B030522DB69AA3003991C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -147,7 +177,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 96QUDFWHW9;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Travel-Schedule/Info.plist";
+				INFOPLIST_FILE = "Travel-Schedule/AssetsInfoLaunchScMain/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -180,7 +210,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 96QUDFWHW9;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Travel-Schedule/Info.plist";
+				INFOPLIST_FILE = "Travel-Schedule/AssetsInfoLaunchScMain/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -345,6 +375,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		333359862DB92DBB00D0CD16 /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-openapi-urlsession";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
+		333359892DB92DCB00D0CD16 /* XCRemoteSwiftPackageReference "swift-openapi-runtime" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-openapi-runtime";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.2;
+			};
+		};
+		33457DD42DB7F74E0002477F /* XCRemoteSwiftPackageReference "swift-openapi-generator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-openapi-generator";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		333359872DB92DBB00D0CD16 /* OpenAPIURLSession */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 333359862DB92DBB00D0CD16 /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */;
+			productName = OpenAPIURLSession;
+		};
+		3333598A2DB92DCB00D0CD16 /* OpenAPIRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 333359892DB92DCB00D0CD16 /* XCRemoteSwiftPackageReference "swift-openapi-runtime" */;
+			productName = OpenAPIRuntime;
+		};
+		333359902DB92DF100D0CD16 /* OpenAPIGenerator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 33457DD42DB7F74E0002477F /* XCRemoteSwiftPackageReference "swift-openapi-generator" */;
+			productName = "plugin:OpenAPIGenerator";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 33B030362DB69AA1003991C0 /* Project object */;
 }
