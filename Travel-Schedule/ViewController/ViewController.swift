@@ -7,6 +7,7 @@
 
 import UIKit
 import OpenAPIURLSession
+import SwiftUI
 
 final class ViewController: UIViewController {
     private let client: Client? = {
@@ -25,14 +26,19 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getNearestStations()
-        getBetweenStationsSchedule()
-        getOnStationsSchedule()
-        getRouteStations()
-        getNearestCity()
-        getCarrierInfo()
-        getStationsList()
-        getCopyright()
+        let controller = UIHostingController(rootView: TabScreenView())
+        self.addChild(controller)
+        self.view.addSubview(controller.view)
+        controller.didMove(toParent: self)
+        controller.view.frame = view.frame
+//        getNearestStations()
+//        getBetweenStationsSchedule()
+//        getOnStationsSchedule()
+//        getRouteStations()
+//        getNearestCity()
+//        getCarrierInfo()
+//        getStationsList()
+//        getCopyright()
     }
     
     func getNearestStations() {
