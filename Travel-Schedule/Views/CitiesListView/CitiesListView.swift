@@ -8,28 +8,76 @@
 import SwiftUI
 
 struct CitiesListView: View {
-    @Binding var path: NavigationPath
-    @Binding var isFromPointSelected: Bool
-    @Binding var isToPointSelected: Bool
-    @Binding var cityFrom: String
-    @Binding var cityTo: String
+    @Binding var stateProperty: StateProperties
     
     var body: some View {
         VStack(spacing: 0) {
-            ListView(path: $path, isFromPointSelected: $isFromPointSelected, isToPointSelected: $isToPointSelected, cityFrom: $cityFrom, cityTo: $cityTo)
+            CitiesOptionView(stateProperty: $stateProperty)
         }
         .toolbarRole(.editor)
         .navigationTitle("Выбор города")
     }
 }
 
+private struct CitiesOptionView: View {
+    @State private var searchCities = ""
+    @Binding var stateProperty: StateProperties
+    
+    private let mockCities: [String] = [
+        "Москва",
+        "Санкт-Петербург",
+        "Сочи",
+        "Горный воздух",
+        "Краснодар",
+        "Казань",
+        "Омск"
+    ]
+    
+    private var filteredCities: [String] {
+        guard !searchCities.isEmpty else { return mockCities}
+        return mockCities.filter { $0.localizedCaseInsensitiveContains((searchCities)) }
+    }
+    
+    var body: some View {
+        VStack {
+            if filteredCities.isEmpty {
+                Text("Город не найден")
+                    .font(.system(size: 24, weight: .bold))
+            } else {
+                ListView(filteredCities: filteredCities, stateProperty: $stateProperty)
+                    .listStyle(.plain)
+            }
+        }
+        .searchable(
+            text: $searchCities,
+            placement: .navigationBarDrawer(displayMode: .always),
+            prompt: "Введите запрос"
+        )
+    }
+}
+
+private struct ListView: View {
+    var filteredCities: [String]
+    @Binding var stateProperty: StateProperties
+    
+    var body: some View {
+        List(filteredCities, id: \.self) { city in
+            HStack {
+                Text(city)
+                    .frame(height: 40)
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.darkWhite)
+            }
+            .listRowSeparator(.hidden)
+            .onTapGesture {
+                stateProperty.path.append(city)
+            }
+        }
+    }
+}
+
 #Preview {
-    CitiesListView(
-        path: .constant(NavigationPath()),
-        isFromPointSelected: .constant(false),
-        isToPointSelected: .constant(false),
-        cityFrom: .constant(""),
-        cityTo: .constant("")
-    )
+    CitiesListView(stateProperty: .constant(StateProperties()))
 }
 

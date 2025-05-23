@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CarrierListView: View {
-    @Binding var path: NavigationPath
+    @Binding var stateProperty: StateProperties
     
     var mockCarriers: [MockCarrierView] = [MockCarrierView()]
     
@@ -26,7 +26,7 @@ struct CarrierListView: View {
             .listStyle(.plain)
             .padding(.top, 16)
             Button("Уточнить время") {
-                path.append("TimeOptions")
+                stateProperty.path.append("TimeOptions")
             }
             .font(.system(size: 17, weight: .bold))
             .frame(maxWidth: .infinity)
@@ -38,11 +38,11 @@ struct CarrierListView: View {
         }
         .toolbarRole(.editor)
         .onTapGesture {
-            path.append("CarrierInfo")
+            stateProperty.path.append("CarrierInfo")
         }
     }
 }
 
 #Preview {
-    CarrierListView(path: .constant(NavigationPath()))
+    CarrierListView(stateProperty: .constant(StateProperties()))
 }

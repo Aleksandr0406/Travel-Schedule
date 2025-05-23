@@ -8,25 +8,18 @@
 import SwiftUI
 
 struct TabScreenView: View {
-    @State var colorScheme: ColorScheme = .light
-    @State var path = NavigationPath()
-    @State var isFromPointSelected: Bool = false
-    @State var isToPointSelected: Bool = false
-    @State var cityFrom: String = "Откуда"
-    @State var cityTo: String = "Куда"
-    @State var stationFrom: String = ""
-    @State var stationTo: String = ""
+    @State var stateProperty: StateProperties = StateProperties()
     
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $stateProperty.path) {
             TabView {
-                MainScreenView(colorScheme: $colorScheme, path: $path, isFromPointSelected: $isFromPointSelected, isToPointSelected: $isToPointSelected, cityFrom: $cityFrom, cityTo: $cityTo, stationFrom: $stationFrom, stationTo: $stationTo)
+                MainScreenView(stateProperty: $stateProperty)
                     .tabItem {
                         Image(.main)
                             .renderingMode(.template)
                     }
                     .toolbarBackground(.visible, for: .tabBar)
-                SettingsView(path: $path, colorScheme: $colorScheme)
+                SettingsView(stateProperty: $stateProperty)
                     .tabItem {
                         Image(.options)
                             .renderingMode(.template)
@@ -36,9 +29,9 @@ struct TabScreenView: View {
             .accentColor(.darkWhite)
             .navigationDestination(for: String.self) { value in
                 if value == "CitiesList" {
-                    CitiesListView(path: $path, isFromPointSelected: $isFromPointSelected, isToPointSelected: $isToPointSelected, cityFrom: $cityFrom, cityTo: $cityTo)
+                    CitiesListView(stateProperty: $stateProperty)
                 } else if value == "CarrierList" {
-                    CarrierListView(path: $path)
+                    CarrierListView(stateProperty: $stateProperty)
                 } else if value == "TimeOptions" {
                     TimeOptionsView()
                 } else if value == "CarrierInfo" {
@@ -46,12 +39,12 @@ struct TabScreenView: View {
                 } else if value == "UserAgreement" {
                     UserAgreementView()
                 } else {
-                    StationsListView(path: $path, isFromPointSelected: $isFromPointSelected, isToPointSelected: $isToPointSelected, stationFrom: $stationFrom, stationTo: $stationTo, city: value)
+                    StationsListView(stateProperty: $stateProperty, city: value)
                 }
             }
         }
         .accentColor(.darkWhite)
-        .environment(\.colorScheme, colorScheme)
+        .environment(\.colorScheme, stateProperty.colorScheme)
     }
 }
 

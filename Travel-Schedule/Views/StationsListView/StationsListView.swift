@@ -8,31 +8,20 @@
 import SwiftUI
 
 struct StationsListView: View {
-    @Binding var path: NavigationPath
-    @Binding var isFromPointSelected: Bool
-    @Binding var isToPointSelected: Bool
-    @Binding var stationFrom: String
-    @Binding var stationTo: String
     @State private var searchTextField: String = ""
+    
+    @Binding var stateProperty: StateProperties
     
     var city: String
     
     var body: some View {
         VStack(spacing: 0) {
-            if city == "Москва" { MSKStationsView(
-                path: $path,
-                isFromPointSelected: $isFromPointSelected,
-                isToPointSelected: $isToPointSelected,
-                stationFrom: $stationFrom,
-                stationTo: $stationTo
-            ) }
-            if city == "Санкт-Петербург" { SPBStationsView(
-                path: $path,
-                isFromPointSelected: $isFromPointSelected,
-                isToPointSelected: $isToPointSelected,
-                stationFrom: $stationFrom,
-                stationTo: $stationTo
-            ) }
+            if city == "Москва" {
+                MSKStationsView(stateProperty: $stateProperty, city: city)
+            }
+            if city == "Санкт-Петербург" {
+                SPBStationsView(stateProperty: $stateProperty, city: city)
+            }
         }
         .toolbarRole(.editor)
         .navigationTitle("Выбор станции")
@@ -40,12 +29,5 @@ struct StationsListView: View {
 }
 
 #Preview {
-    StationsListView(
-        path: .constant(NavigationPath()),
-        isFromPointSelected: .constant(false),
-        isToPointSelected: .constant(false),
-        stationFrom: .constant(""),
-        stationTo: .constant(""),
-        city: ""
-    )
+    StationsListView(stateProperty: .constant(StateProperties()), city: "")
 }

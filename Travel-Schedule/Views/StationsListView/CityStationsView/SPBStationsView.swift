@@ -9,13 +9,10 @@ import SwiftUI
 
 struct SPBStationsView: View {
     @State private var searchStations = ""
-    @Binding var path: NavigationPath
-    @Binding var isFromPointSelected: Bool
-    @Binding var isToPointSelected: Bool
-    @Binding var stationFrom: String
-    @Binding var stationTo: String
+    @Binding var stateProperty: StateProperties
     
     let mockCitiesStationsSPB: [String] = ["Балтийский вокзал"]
+    var city: String
     
     var filteredStations: [String] {
         guard !searchStations.isEmpty else { return mockCitiesStationsSPB }
@@ -37,13 +34,20 @@ struct SPBStationsView: View {
                             .foregroundColor(.darkWhite)
                     }
                     .onTapGesture {
-                        if isFromPointSelected && isToPointSelected == false {
-                            stationFrom = station
+                        if stateProperty.isFromPointSelected && stateProperty.isToPointSelected == false {
+                            stateProperty.cityFrom = city
+                            stateProperty.stationFrom = station
+                            stateProperty.isFromPointSelected = false
+                            stateProperty.isFromPointShow = true
                         }
-                        if isToPointSelected {
-                            stationTo = station
+                        
+                        if stateProperty.isFromPointSelected == false && stateProperty.isToPointSelected {
+                            stateProperty.cityTo = city
+                            stateProperty.stationTo = station
+                            stateProperty.isToPointSelected = false
+                            stateProperty.isToPointShow = true
                         }
-                        path.removeLast(path.count)
+                        stateProperty.path.removeLast(stateProperty.path.count)
                     }
                     .listRowSeparator(.hidden)
                 }
@@ -59,11 +63,5 @@ struct SPBStationsView: View {
 }
 
 #Preview {
-    SPBStationsView(
-        path: .constant(NavigationPath()),
-        isFromPointSelected: .constant(false),
-        isToPointSelected: .constant(false),
-        stationFrom: .constant(""),
-        stationTo: .constant("")
-    )
+    SPBStationsView(stateProperty: .constant(StateProperties()), city: "")
 }
