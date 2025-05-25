@@ -9,8 +9,7 @@ import Foundation
 import OpenAPIRuntime
 import OpenAPIURLSession
 import SwiftUI
-import OpenAPIKit30
-import OpenAPIKit
+
 
 typealias NearestStations = Components.Schemas.Stations
 typealias StationsSchedule = Components.Schemas.StationsSchedule
