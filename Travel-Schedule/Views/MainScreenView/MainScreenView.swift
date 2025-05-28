@@ -7,18 +7,58 @@
 import SwiftUI
 
 struct MainScreenView: View {
+    @State var indexOfStory: Int = 0
+    @State var indexesOfViewStories: [Int] = []
     @Binding var stateProperty: StateProperties
     
     var body: some View {
         VStack {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    MiniStoriesView(
+                        indexOfStory: $indexOfStory,
+                        indexesOfViewStories: $indexesOfViewStories,
+                        stateProperty: $stateProperty
+                    )
+                    .fullScreenCover(isPresented: $stateProperty.isPresentingStory) {
+                        StoriesView(stateProperty: $stateProperty, index: indexOfStory)
+                    }
+                }
+                .frame(height: 140)
+                .padding(.leading, 16)
+            }
             ZStack {
                 BlueRoundedRectangleView()
                 HStackElementsView(stateProperty: $stateProperty)
             }
             .frame(width: 311, height: 96)
-            .padding(.top, 208)
+            .padding(.top, 44)
             ButtonSearchView(stateProperty: $stateProperty)
             Spacer()
+        }
+    }
+}
+
+private struct MiniStoriesView: View {
+    @Binding var indexOfStory: Int
+    @Binding var indexesOfViewStories: [Int]
+    @Binding var stateProperty: StateProperties
+    
+    let stories: [Story] = [.story1, .story2, . story3]
+    
+    var body: some View {
+        ForEach(0..<stories.count) { index in
+            let isStoryViewed = indexesOfViewStories.contains(index)
+            Image(uiImage: stories[index].image)
+                .frame(width: 92)
+                .clipShape(.rect(cornerRadius: 16))
+                .overlay(RoundedRectangle(cornerRadius: 16).strokeBorder(.blue, lineWidth: isStoryViewed ? 0 : 4))
+                .opacity(isStoryViewed ? 0.5 : 1)
+                .onTapGesture {
+                    indexOfStory = index
+                    indexesOfViewStories.append(indexOfStory)
+                    stateProperty.isPresentingStory = true
+                }
         }
     }
 }
@@ -152,7 +192,7 @@ private struct ButtonSearchView: View {
 }
 
 #Preview {
-    MainScreenView(stateProperty: .constant(StateProperties()))
+    MainScreenView(indexOfStory: 0, stateProperty: .constant(StateProperties()))
 }
 
 

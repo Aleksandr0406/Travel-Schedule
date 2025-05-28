@@ -1,7 +1,7 @@
 import SwiftUI
 import Combine
 
-struct ContentView: View {
+struct StoriesView: View {
     struct Configuration {
         let timerTickInternal: TimeInterval
         let progressPerTick: CGFloat
@@ -97,6 +97,6 @@ struct ContentView: View {
     }
 }
 
-//#Preview {
-//    ContentView(stateProperty: .constant(StateProperties()), index: 0)
-//}
+#Preview {
+    StoriesView(stateProperty: .constant(StateProperties()), index: 0)
+}

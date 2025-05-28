@@ -2,7 +2,7 @@ import SwiftUI
 
 struct StoryView: View {
     let story: Story
-
+    
     var body: some View {
         story.backgroundColor
             .ignoresSafeArea()
@@ -21,7 +21,7 @@ struct StoryView: View {
                     .padding(.init(top: 0, leading: 16, bottom: 40, trailing: 16))
                 }
             )
-
+        
     }
 }
 
