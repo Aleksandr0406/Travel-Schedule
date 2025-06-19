@@ -25,7 +25,7 @@ struct SettingsView: View {
 }
 
 private struct DarkThemeHStackView: View {
-    @State var isEnabled: Bool = false
+    @State private var isEnabled: Bool = false
     @Binding var stateProperty: StateProperties
     
     var body: some View {

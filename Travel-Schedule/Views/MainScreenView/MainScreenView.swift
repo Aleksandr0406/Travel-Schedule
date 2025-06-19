@@ -7,8 +7,9 @@
 import SwiftUI
 
 struct MainScreenView: View {
-    @State var indexOfStory: Int = 0
-    @State var indexesOfViewStories: [Int] = []
+    @State private var tabSelection: Int = 0
+    @State private var indexOfGroupStories: Int = 0
+    @State private var indexesOfViewStories: [Int] = []
     @Binding var stateProperty: StateProperties
     
     var body: some View {
@@ -16,12 +17,17 @@ struct MainScreenView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
                     MiniStoriesView(
-                        indexOfStory: $indexOfStory,
+                        tabSelection: $tabSelection,
+                        indexOfGroupStories: $indexOfGroupStories,
                         indexesOfViewStories: $indexesOfViewStories,
                         stateProperty: $stateProperty
                     )
                     .fullScreenCover(isPresented: $stateProperty.isPresentingStory) {
-                        StoriesView(stateProperty: $stateProperty, index: indexOfStory)
+                        StoriesView(
+                            stateProperty: $stateProperty,
+                            indexOfGroupStories: $indexOfGroupStories,
+                            tabSelection: $tabSelection
+                        )
                     }
                 }
                 .frame(height: 140)
@@ -40,23 +46,29 @@ struct MainScreenView: View {
 }
 
 private struct MiniStoriesView: View {
-    @Binding var indexOfStory: Int
+    @Binding var tabSelection: Int
+    @Binding var indexOfGroupStories: Int
     @Binding var indexesOfViewStories: [Int]
     @Binding var stateProperty: StateProperties
     
-    let stories: [Story] = [.story1, .story2, . story3]
+    private let storiesThemes: [UIImage] = [
+        UIImage(resource: .mainTheme1),
+        UIImage(resource: .mainTheme2),
+        UIImage(resource: .mainTheme3)
+    ]
     
     var body: some View {
-        ForEach(0..<stories.count) { index in
+        ForEach(0..<storiesThemes.count, id: \.self) { index in
             let isStoryViewed = indexesOfViewStories.contains(index)
-            Image(uiImage: stories[index].image)
+            Image(uiImage: storiesThemes[index])
                 .frame(width: 92)
                 .clipShape(.rect(cornerRadius: 16))
                 .overlay(RoundedRectangle(cornerRadius: 16).strokeBorder(.blue, lineWidth: isStoryViewed ? 0 : 4))
                 .opacity(isStoryViewed ? 0.5 : 1)
                 .onTapGesture {
-                    indexOfStory = index
-                    indexesOfViewStories.append(indexOfStory)
+                    indexOfGroupStories = index
+                    indexesOfViewStories.append(indexOfGroupStories)
+                    tabSelection = index
                     stateProperty.isPresentingStory = true
                 }
         }
@@ -192,7 +204,7 @@ private struct ButtonSearchView: View {
 }
 
 #Preview {
-    MainScreenView(indexOfStory: 0, stateProperty: .constant(StateProperties()))
+    MainScreenView(stateProperty: .constant(StateProperties()))
 }
 
 
