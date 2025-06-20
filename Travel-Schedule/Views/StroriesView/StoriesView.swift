@@ -7,16 +7,6 @@ struct StoriesView: View {
     @Binding var stateProperty: StateProperties
     @Binding var tabSelection: Int
     
-    init(
-        stateProperty: Binding<StateProperties>,
-        indexOfGroupStories: Binding<Int>,
-        tabSelection: Binding<Int>
-    ) {
-        _stateProperty = stateProperty
-        _tabSelection = tabSelection
-        _indexOfGroupStories = indexOfGroupStories
-    }
-    
     var body: some View {
         TabView(selection: $tabSelection) {
             FullStoryConstructorView(
@@ -39,7 +29,7 @@ struct StoriesView: View {
             ).tag(2)
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-        .edgesIgnoringSafeArea(.vertical)
+        .ignoresSafeArea()
     }
 }
 
@@ -202,8 +192,8 @@ private struct FullStoryConstructorView: View {
 
 #Preview {
     StoriesView(
-        stateProperty: .constant(StateProperties()),
         indexOfGroupStories: .constant(0),
+        stateProperty: .constant(StateProperties()),
         tabSelection: .constant(0)
-    )
+        )
 }

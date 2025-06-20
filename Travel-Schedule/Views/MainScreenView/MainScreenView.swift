@@ -24,8 +24,8 @@ struct MainScreenView: View {
                     )
                     .fullScreenCover(isPresented: $stateProperty.isPresentingStory) {
                         StoriesView(
-                            stateProperty: $stateProperty,
                             indexOfGroupStories: $indexOfGroupStories,
+                            stateProperty: $stateProperty,
                             tabSelection: $tabSelection
                         )
                     }

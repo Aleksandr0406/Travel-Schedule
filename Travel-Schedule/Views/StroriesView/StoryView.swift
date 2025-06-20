@@ -4,7 +4,7 @@ struct StoryView: View {
     let story: Story
     
     var body: some View {
-        ZStack() {
+        ZStack {
             Image(uiImage: story.image)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
