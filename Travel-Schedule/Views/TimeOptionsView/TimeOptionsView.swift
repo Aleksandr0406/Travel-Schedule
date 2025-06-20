@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct TimeOptionsView: View {
-    @State var isTransferOptionYesSelect: Bool = false
-    @State var isTransferOptionNoSelect: Bool = false
-    @State var shouldHide: Bool = true
+    @State private var isTransferOptionYesSelect: Bool = false
+    @State private var isTransferOptionNoSelect: Bool = false
+    @State private var shouldHide: Bool = true
     
     var body: some View {
         VStack {
@@ -42,7 +42,7 @@ struct TimeOptionsView: View {
 }
 
 private struct MorningTimeView: View {
-    @State var isMorningTimeSelect: Bool = false
+    @State private var isMorningTimeSelect: Bool = false
     
     var body: some View {
         HStack {
@@ -60,7 +60,7 @@ private struct MorningTimeView: View {
 }
 
 private struct DayTimeView: View {
-    @State var isDayTimeSelect: Bool = false
+    @State private var isDayTimeSelect: Bool = false
     
     var body: some View {
         HStack {
@@ -78,7 +78,7 @@ private struct DayTimeView: View {
 }
 
 private struct EveningTimeView: View {
-    @State var isEveningTimeSelect: Bool = false
+    @State private var isEveningTimeSelect: Bool = false
     
     var body: some View {
         HStack {
@@ -96,7 +96,7 @@ private struct EveningTimeView: View {
 }
 
 private struct NightTimeView: View {
-    @State var isNightTimeSelect: Bool = false
+    @State private var isNightTimeSelect: Bool = false
     
     var body: some View {
         HStack {

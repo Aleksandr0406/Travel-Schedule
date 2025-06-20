@@ -7,18 +7,70 @@
 import SwiftUI
 
 struct MainScreenView: View {
+    @State private var tabSelection: Int = 0
+    @State private var indexOfGroupStories: Int = 0
+    @State private var indexesOfViewStories: [Int] = []
     @Binding var stateProperty: StateProperties
     
     var body: some View {
         VStack {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    MiniStoriesView(
+                        tabSelection: $tabSelection,
+                        indexOfGroupStories: $indexOfGroupStories,
+                        indexesOfViewStories: $indexesOfViewStories,
+                        stateProperty: $stateProperty
+                    )
+                    .fullScreenCover(isPresented: $stateProperty.isPresentingStory) {
+                        StoriesView(
+                            indexOfGroupStories: $indexOfGroupStories,
+                            stateProperty: $stateProperty,
+                            tabSelection: $tabSelection
+                        )
+                    }
+                }
+                .frame(height: 140)
+                .padding(.leading, 16)
+            }
             ZStack {
                 BlueRoundedRectangleView()
                 HStackElementsView(stateProperty: $stateProperty)
             }
             .frame(width: 311, height: 96)
-            .padding(.top, 208)
+            .padding(.top, 44)
             ButtonSearchView(stateProperty: $stateProperty)
             Spacer()
+        }
+    }
+}
+
+private struct MiniStoriesView: View {
+    @Binding var tabSelection: Int
+    @Binding var indexOfGroupStories: Int
+    @Binding var indexesOfViewStories: [Int]
+    @Binding var stateProperty: StateProperties
+    
+    private let storiesThemes: [UIImage] = [
+        UIImage(resource: .mainTheme1),
+        UIImage(resource: .mainTheme2),
+        UIImage(resource: .mainTheme3)
+    ]
+    
+    var body: some View {
+        ForEach(0..<storiesThemes.count, id: \.self) { index in
+            let isStoryViewed = indexesOfViewStories.contains(index)
+            Image(uiImage: storiesThemes[index])
+                .frame(width: 92)
+                .clipShape(.rect(cornerRadius: 16))
+                .overlay(RoundedRectangle(cornerRadius: 16).strokeBorder(.blue, lineWidth: isStoryViewed ? 0 : 4))
+                .opacity(isStoryViewed ? 0.5 : 1)
+                .onTapGesture {
+                    indexOfGroupStories = index
+                    indexesOfViewStories.append(indexOfGroupStories)
+                    tabSelection = index
+                    stateProperty.isPresentingStory = true
+                }
         }
     }
 }

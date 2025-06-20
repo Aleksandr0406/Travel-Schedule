@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TabScreenView: View {
-    @State var stateProperty: StateProperties = StateProperties()
+    @State private var stateProperty: StateProperties = StateProperties()
     
     var body: some View {
         NavigationStack(path: $stateProperty.path) {

@@ -18,4 +18,5 @@ struct StateProperties {
     var stationTo: String = ""
     var isFromPointShow: Bool = false
     var isToPointShow: Bool = false
+    var isPresentingStory: Bool = false
 }

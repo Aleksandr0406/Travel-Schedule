@@ -13,7 +13,7 @@ struct MockCarrierView: View, Hashable {
             RoundedRectangle(cornerRadius: 24)
                 .frame(maxWidth: .infinity)
                 .frame(height: 104)
-                .foregroundStyle(.lightGray)
+                .foregroundStyle(.lightGr)
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
                     Image(.carrierIcon)

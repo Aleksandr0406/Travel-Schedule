@@ -11,7 +11,7 @@ struct SPBStationsView: View {
     @State private var searchStations = ""
     @Binding var stateProperty: StateProperties
     
-    let mockCitiesStationsSPB: [String] = ["Балтийский вокзал"]
+    private let mockCitiesStationsSPB: [String] = ["Балтийский вокзал"]
     var city: String
     
     var filteredStations: [String] {

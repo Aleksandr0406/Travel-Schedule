@@ -31,14 +31,14 @@ final class ViewController: UIViewController {
         self.view.addSubview(controller.view)
         controller.didMove(toParent: self)
         controller.view.frame = view.frame
-//        getNearestStations()
-//        getBetweenStationsSchedule()
-//        getOnStationsSchedule()
-//        getRouteStations()
-//        getNearestCity()
-//        getCarrierInfo()
-//        getStationsList()
-//        getCopyright()
+        //        getNearestStations()
+        //        getBetweenStationsSchedule()
+        //        getOnStationsSchedule()
+        //        getRouteStations()
+        //        getNearestCity()
+        //        getCarrierInfo()
+        //        getStationsList()
+        //        getCopyright()
     }
     
     func getNearestStations() {
